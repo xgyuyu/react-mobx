@@ -4,7 +4,7 @@ import { Provider, observer, inject } from 'mobx-react'
 
 // 定义数据结构
 class Store {
-  // ① 使用 observable decorator 
+  // 使用 observable 
   @observable a = 0;
 }
 
@@ -13,7 +13,7 @@ class Actions {
   constructor({store}) {
     this.store = store
   }
-  // ② 使用 action decorator 
+  // 使用 action 
   @action
   incA = () => {
     this.store.a++
@@ -24,13 +24,13 @@ class Actions {
   }
 }
 
-// ③实例化单一数据源
+// 实例化单一数据源
 const store = new Store()
-// ④实例化 actions，并且和 store 进行关联
+// 实例化 actions，并且和 store 进行关联
 const actions = new Actions({store})
 
 // inject 向业务组件注入 store，actions，和 Provider 配合使用
-// ⑤ 使用 inject decorator 和 observer decorator
+// 使用 inject和observer
 @inject('store', 'actions')
 @observer
 class Demo extends Component {
@@ -50,7 +50,7 @@ class Demo extends Component {
 
 class App extends Component {
   render() {
-    // ⑥使用Provider 在被 inject 的子组件里，可以通过 props.store props.actions 访问
+    // 使用Provider 在被 inject 的子组件里，可以通过 props.store props.actions 访问
     return (
       <Provider store={store} actions={actions}>
         <Demo />
